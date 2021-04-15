@@ -402,9 +402,8 @@ export async function getStaticPaths() {
     await dbConnect();
     const res = await Items.find({});
     let categories = [];
-    res.forEach((e) => {
-      let item = e.toObject();
-      if (!categories.includes(item.category)) categories.push(item.category);
+    JSON.parse(JSON.stringify(res)).forEach((e) => {
+      if (!categories.includes(e.category)) categories.push(e.category);
     });
     const paths = categories.map((e) => ({
       params: { id: e },
