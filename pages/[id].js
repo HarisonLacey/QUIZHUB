@@ -402,7 +402,7 @@ export async function getStaticPaths() {
     await dbConnect();
     const res = await Items.find({});
     let categories = [];
-    JSON.parse(JSON.stringify(res)).forEach((e) => {
+    await JSON.parse(JSON.stringify(res)).forEach((e) => {
       if (!categories.includes(e.category)) categories.push(e.category);
     });
     const paths = categories.map((e) => ({
