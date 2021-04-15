@@ -190,7 +190,7 @@ export default function Home({ category, score, images }) {
           <Column xs={6}>
             <Row noGutters>
               {category.map((e) => (
-                <Col key={e} noGutters xs={6} lg={4}>
+                <Col key={e} xs={6} lg={4}>
                   <Link href={`/${encodeURIComponent(e)}`}>
                     <a style={{ textDecoration: "none" }}>
                       <Button image={images[category.indexOf(e)].url}>
@@ -216,7 +216,9 @@ export default function Home({ category, score, images }) {
                 </ScoreButton>
                 <Panel show={show} scroll={scroll} id="panel">
                   {category.map((e) => (
-                    <p onClick={Option}>{Capital(e)}</p>
+                    <p key={e} onClick={Option}>
+                      {Capital(e)}
+                    </p>
                   ))}
                 </Panel>
               </Col>
