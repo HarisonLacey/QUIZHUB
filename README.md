@@ -1,6 +1,6 @@
 # QUIZHUB
 
-This is a website, built using Next.js, for the quiz website QUIZHUB.
+This is a quiz website built using Next.js.
 
 This website relies on pre-fetching data during build time using Next.js getStaticProps functionality.
 
