@@ -151,6 +151,7 @@ export default function Home({ category, score, images }) {
             array.push(e);
           }
         });
+        // top 10 splice
         array.splice(10);
         setOption(array);
         setScoreShow(true);
