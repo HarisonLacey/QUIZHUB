@@ -181,7 +181,7 @@ export default function Home({ category, score, images }) {
           <div>
             <p onClick={() => setScoreShow(false)}>close</p>
             {option.map((e) => (
-              <p key={e.id} key={e}>
+              <p key={e.id}>
                 {e.name}: {e.score}%
               </p>
             ))}
