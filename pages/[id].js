@@ -272,7 +272,7 @@ export default function Category({ items, image }) {
                       <Col xs={4}>Correct Answer</Col>
                       {userAnswers.map((e) => (
                         <>
-                          <Col className="scores" xs={12}>
+                          <Col className="scores" xs={12} key={e}>
                             <Row>
                               <Col xs={4}>
                                 {items[userAnswers.indexOf(e)].question}
