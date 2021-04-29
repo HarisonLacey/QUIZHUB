@@ -6,7 +6,7 @@ import Link from "next/link";
 import styled, { keyframes, css } from "styled-components";
 import Layout from "../components/Layout";
 import { Container, Row, Col } from "react-bootstrap";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Capital, UnCapital } from "../components/Capital";
 import Sizes from "../components/Sizes";
 
@@ -140,6 +140,7 @@ export default function Home({ category, score, images }) {
   const [option, setOption] = useState([]);
   const [height, setHeight] = useState("");
   const [scroll, setScroll] = useState("");
+  const panel = useRef();
   // get top 10 scores
   const Option = useCallback(
     (e) => {
@@ -164,7 +165,7 @@ export default function Home({ category, score, images }) {
   }, []);
   // use callback incase we want to remove listener -> saves 1st instance of function
   let panelHeight = useCallback(() => {
-    setScroll(document.getElementById("panel").scrollHeight);
+    setScroll(panel.current.scrollHeight);
   }, []);
   // modal and panel height
   useEffect(() => {
@@ -214,7 +215,7 @@ export default function Home({ category, score, images }) {
                 >
                   Scores
                 </ScoreButton>
-                <Panel show={show} scroll={scroll} id="panel">
+                <Panel show={show} scroll={scroll} ref={panel}>
                   {category.map((e) => (
                     <p key={e} onClick={Option}>
                       {Capital(e)}
