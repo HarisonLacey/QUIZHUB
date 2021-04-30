@@ -170,11 +170,25 @@ export default function Category({ items, image }) {
   // results background colour
   useEffect(() => {
     let answers = document.getElementsByClassName("scores");
-    for (let i = 0; i < answers.length; i++) {
-      if (userAnswers[i] === correctAnswers[i])
-        answers[i].style.backgroundColor = "#54e346";
-      else answers[i].style.backgroundColor = "#ed6663";
-    }
+    // alternative loop function 1
+    /* [].forEach.call(answers, (answer, index, array) => {
+      console.log(array);
+      if (userAnswers[index] === correctAnswers[index])
+        answer.style.backgroundColor = "#54e346";
+      else answer.style.backgroundColor = "#ed6663";
+    }); */
+    // alternative loop function 2
+    Array.from(answers).forEach((answer, index) => {
+      if (userAnswers[index] === correctAnswers[index])
+        answer.style.backgroundColor = "#54e346";
+      else answer.style.backgroundColor = "#ed6663";
+    });
+    // alternative loop function 3
+    /* for (let [index, answer] of [...answers].entries()) {
+      if (userAnswers[index] === correctAnswers[index])
+        answer.style.backgroundColor = "#54e346";
+      else answer.style.backgroundColor = "#ed6663";
+    } */
   }, [result]);
   // timer
   useEffect(() => {
@@ -270,17 +284,13 @@ export default function Category({ items, image }) {
                       <Col xs={4}>Question</Col>
                       <Col xs={4}>Your Answer</Col>
                       <Col xs={4}>Correct Answer</Col>
-                      {userAnswers.map((e) => (
+                      {userAnswers.map((e, index) => (
                         <>
                           <Col className="scores" xs={12} key={e}>
                             <Row>
-                              <Col xs={4}>
-                                {items[userAnswers.indexOf(e)].question}
-                              </Col>
+                              <Col xs={4}>{items[index].question}</Col>
                               <Col xs={4}>{e}</Col>
-                              <Col xs={4}>
-                                {correctAnswers[userAnswers.indexOf(e)]}
-                              </Col>
+                              <Col xs={4}>{correctAnswers[index]}</Col>
                             </Row>
                           </Col>
                         </>

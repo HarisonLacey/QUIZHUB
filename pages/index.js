@@ -190,13 +190,11 @@ export default function Home({ category, score, images }) {
         <Row style={{ paddingTop: "20px" }} noGutters>
           <Column xs={6}>
             <Row noGutters>
-              {category.map((e) => (
+              {category.map((e, index) => (
                 <Col key={e} xs={6} lg={4}>
                   <Link href={`/${encodeURIComponent(e)}`}>
                     <a style={{ textDecoration: "none" }}>
-                      <Button image={images[category.indexOf(e)].url}>
-                        {Capital(e)}
-                      </Button>
+                      <Button image={images[index].url}>{Capital(e)}</Button>
                     </a>
                   </Link>
                 </Col>
