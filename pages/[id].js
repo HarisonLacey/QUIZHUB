@@ -167,16 +167,24 @@ export default function Category({ items, image }) {
       ]);
     });
   }, []);
+  // results background color using ref and usecallback
+  const scoreColors = useCallback((el, index) => {
+    if (el) {
+      if (userAnswers[index] === correctAnswers[index])
+        el.style.backgroundColor = "#54e346";
+      else el.style.backgroundColor = "#ed6663";
+    }
+  }, [userAnswers, correctAnswers]);
   // results background colour
-  useEffect(() => {
+  /* useEffect(() => {
     let answers = document.getElementsByClassName("scores");
     // alternative loop function 1
-    /* [].forEach.call(answers, (answer, index, array) => {
+    [].forEach.call(answers, (answer, index, array) => {
       console.log(array);
       if (userAnswers[index] === correctAnswers[index])
         answer.style.backgroundColor = "#54e346";
       else answer.style.backgroundColor = "#ed6663";
-    }); */
+    });
     // alternative loop function 2
     Array.from(answers).forEach((answer, index) => {
       if (userAnswers[index] === correctAnswers[index])
@@ -184,12 +192,12 @@ export default function Category({ items, image }) {
       else answer.style.backgroundColor = "#ed6663";
     });
     // alternative loop function 3
-    /* for (let [index, answer] of [...answers].entries()) {
+    for (let [index, answer] of [...answers].entries()) {
       if (userAnswers[index] === correctAnswers[index])
         answer.style.backgroundColor = "#54e346";
       else answer.style.backgroundColor = "#ed6663";
-    } */
-  }, [result]);
+    }
+  }, [result]); */
   // timer
   useEffect(() => {
     if (!start && !end) {
@@ -286,7 +294,12 @@ export default function Category({ items, image }) {
                       <Col xs={4}>Correct Answer</Col>
                       {userAnswers.map((e, index) => (
                         <>
-                          <Col className="scores" xs={12} key={e}>
+                          <Col
+                            ref={(el) => scoreColors(el, index)}
+                            className="scores"
+                            xs={12}
+                            key={e}
+                          >
                             <Row>
                               <Col xs={4}>{items[index].question}</Col>
                               <Col xs={4}>{e}</Col>
